@@ -3,6 +3,7 @@
 	
 	// check connection
 	if ($conn->connect_error) {
+		$conn->close();
 		exit("-1");
 	}
 	
@@ -13,26 +14,25 @@
 	$lastModifiedMobile = $_POST["lastModifiedMobile"];
 	$lastModifiedServer = $_POST["lastModifiedServer"];
 	
-	// 1) check if the vmail exists in the table
-	$sql = "SELECT `name` FROM `vmails` WHERE `ID` = '" . $ID . "'";
-	$result = $conn->query($sql);
-	
-	if ($result->num_rows > 0) { // 2.1) if exists, update the date and time
-		$sql2 = "UPDATE vmails SET ";
-		$sql2 .= "name = '" . $name . "', ";
-		$sql2 .= "lastModifiedDesktop = '" . $lastModifiedDesktop . "', ";
-		$sql2 .= "lastModifiedMobile = '" . $lastModifiedMobile . "', ";
-		$sql2 .= "lastModifiedServer = '" . $lastModifiedServer . "' ";
-		$sql2 .= "WHERE ID = '" . $ID . "'";
-		
-		if ($conn->query($sql2) === TRUE) {
-			echo $ID;
-		} else {
-			exit("-1");
-		}
-	} else { // 2.2) if does not exists
+	// exits, if the vmail does not exist in the table
+	$query = "SELECT name FROM vmails WHERE ID=?";
+	$stmt = $conn->prepare($query);
+	$stmt->bind_param("s", $ID);
+	$stmt->execute();
+	$result = $stmt->get_result();
+	$row = $result->fetch_assoc();
+	if ($row == null) {
+		$conn->close();
 		exit("-1");
 	}
+
+	// otherwise, update the table
+	$query = "UPDATE vmails SET name=?, lastModifiedDesktop=?, lastModifiedMobile=?, lastModifiedServer=? WHERE ID = ?";
+	$stmt = $conn->prepare($query);
+	$stmt->bind_param("sssss", $name, $lastModifiedDesktop, $lastModifiedMobile, $lastModifiedServer, $ID);
+	$stmt->execute();
 	
+	echo $ID;
+
 	$conn->close();
 ?>

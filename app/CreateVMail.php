@@ -13,15 +13,12 @@
 	$lastModifiedServer = $_POST["lastModifiedServer"];
 	
 	// insert it into the table with the posted information
-	$sql = "INSERT INTO vmails ";
-	$sql .= "(name, lastModifiedDesktop, lastModifiedMobile, lastModifiedServer) ";
-	$sql .= " VALUES ('" . $name . "', '" . $lastModifiedDesktop . "', '" . $lastModifiedMobile . "', '" . $lastModifiedServer . "');";
-	
-	if ($conn->query($sql) === TRUE) {
-		echo $conn->insert_id;
-	} else {
-		exit("-1");
-	}
+	$query = "INSERT INTO vmails (name, lastModifiedDesktop, lastModifiedMobile, lastModifiedServer) VALUES (?,?,?,?);";
+	$stmt = $conn->prepare($query);
+	$stmt->bind_param("ssss", $name, $lastModifiedDesktop, $lastModifiedMobile, $lastModifiedServer);
+	$stmt->execute();
+
+	echo $conn->insert_id;
 	
 	$conn->close();
 ?>
