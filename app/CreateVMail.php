@@ -3,9 +3,7 @@
 	
 	// Check connection
 	if ($conn->connect_error) {
-		# like return in C#
-		# . is to concatenate
-		die("Connection failed: " . $conn->connect_error);
+		exit("-1");
 	}
 	
 	// variables submited by user (POST - capitalized!!!)
@@ -22,7 +20,7 @@
 	if ($conn->query($sql) === TRUE) {
 		echo $conn->insert_id;
 	} else {
-		exit("Error: " . $sql . "<br>" . $conn->error);
+		exit("-1");
 	}
 	
 	$conn->close();

@@ -6,6 +6,6 @@
 		echo file_get_contents($filePath);
 	}
 	else {
-		echo "";
+	    echo "-1";
 	}
 ?>

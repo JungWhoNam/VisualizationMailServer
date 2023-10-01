@@ -8,10 +8,10 @@
 	$subDirPathFrom = $dirPathFrom . "/thumbnails";
 	
 	if (!file_exists($dirPathFrom)) {
-		exit("-1: dirPathFrom does not exist. " . $dirPathFrom);
+		exit("-1");
 	}
 	if (!file_exists($subDirPathFrom)) {
-		exit("-1: subDirPathFrom does not exist. " . $subDirPathFrom);
+		exit("-1");
 	}
 	
 	// 1) create a vmail directory based on ID and trackingID
@@ -20,18 +20,18 @@
 	
 	if (!file_exists($dirPathTo)) { 
 		if (!mkdir($dirPathTo, 0755, true)) {
-			exit("-1: dirPathTo mkdir");
+			exit("-1");
 		}
 	}
 	if (!file_exists($subDirPathTo)) { 
 		if (!mkdir($subDirPathTo, 0755, true)) {
-			exit("-1: subDirPathTo mkdir");
+			exit("-1");
 		}
 	}
 	
 	// 2) copy msg.json to the new vmail directory
 	if (!copy($dirPathFrom . "/msg.json", $dirPathTo . "/msg.json")) {
-		exit("-1: failed to copy msg.json");
+		exit("-1");
 	}
 	
 	// 3) copy each file in the "thumbnails" directory

@@ -1,11 +1,9 @@
 <?php
 	require 'ConnectionSettings.php';
 	
-	// Check connection
+	// check connection
 	if ($conn->connect_error) {
-		# like return in C#
-		# . is to concatenate
-		die("Connection failed: " . $conn->connect_error);
+		exit("-1");
 	}
 	
 	// variables submited by user (POST - capitalized!!!)
@@ -30,10 +28,10 @@
 		if ($conn->query($sql2) === TRUE) {
 			echo $ID;
 		} else {
-			exit("Error: " . $sql2 . "<br>" . $conn->error);
+			exit("-1");
 		}
 	} else { // 2.2) if does not exists
-		exit("Error: no row with the ID");
+		exit("-1");
 	}
 	
 	$conn->close();

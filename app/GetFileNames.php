@@ -3,14 +3,13 @@
 	$dirPath = $_POST["dirPath"];
 	
 	if (!file_exists($dirPath) || !is_dir($dirPath)) {
-		echo "";
+		echo "-1";
 	}
 	else {
 		// get the list of files in the directory
 		$files = scandir($dirPath);
 		// remove the current and the parent directories from the array
 		$files = array_diff($files, array('.', '..'));
-		//print_r($files);
 		
 		$results = "";
 		foreach ($files as &$file) {
