@@ -1,0 +1,16 @@
+# create `mysql` folder, if not there.
+if ! [ -d ${PWD}/mysql ]; then
+   mkdir mysql
+fi
+
+# run the docker conainer
+docker run \
+-p "80:80" \
+-v ${PWD}/app:/app \
+-v ${PWD}/mysql:/var/lib/mysql \
+mattrayner/lamp:latest-2004-php8
+
+# # create a database `vmails`
+# mysql -e "create database vmails"
+# #  Executing SQL Statements from a Text File
+# mysql vmails < /app/create_vmails_table.sql

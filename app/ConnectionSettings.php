@@ -3,7 +3,7 @@
 	$host  = "localhost";
 	$dbuser = "root";
 	$dbpass = "";
-	$dbname = "vmailbackend";
+	$dbname = "vmails";
 
 	// Create database connection
 	$conn = new mysqli($host, $dbuser, $dbpass, $dbname);
