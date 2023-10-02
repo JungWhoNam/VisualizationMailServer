@@ -4,10 +4,10 @@ V-Mail is  a framework of cross-platform applications, interactive techniques, a
 ## Related GitHub Repos
 * PC/Mac, Android V-Mail Clients
     * https://github.com/JungWhoNam/VisualizationMail
-* V-Mail Server
+* V-Mail Server (this current repo)
     * https://github.com/JungWhoNam/VisualizationMailServer
-* Integration to a data visualization application
-    * https://github.com/JungWhoNam/BrainTensorVis/tree/vmail
+<!-- * Integration to a data visualization application
+    * https://github.com/JungWhoNam/BrainTensorVis/tree/vmail -->
 
 # Visualization Mail (V-Mail) Server
 The server is composed of a MySQL Database and a file storage. PHP scripts in this repo handles server-side scripting. 
